@@ -65,3 +65,22 @@ FROM SalesDW.[dbo].ProductSales
 ALTER TABLE ProductSales
 ADD RegionClean varchar(50)
 
+DROP TABLE dbo.Country
+--Create Country Table 
+CREATE TABLE Country
+(
+CountryID INT IDENTITY (1,1) NOT NULL PRIMARY KEY,
+CountryName VARCHAR (50),
+RegionID INT FOREIGN KEY
+CreateTimeStamp DATETIME, 
+UpdateTimeStamp DATETIME
+)
+
+UPDATE ProductSales 
+SET RegionClean = CASE WHEN REGION = 'Central America and the C' THEN 'Central America and the Carribean'
+WHEN REGION = 'Middle East and North Afr' THEN 'Middle East and North Africa' 
+ELSE REGION
+END
+
+
+
